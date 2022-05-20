@@ -8,14 +8,14 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ChessPanel extends JPanel {
+public class ChessView extends JPanel {
     int originX = 50;
     int originY = 45;
     int cellSide = 60;
 
     Map<String, Image> keyNameValueImage = new HashMap<String, Image>();
 
-    public ChessPanel() {
+    public ChessView() {
         String[] imageNames = {
                 "Bishop-black",
                 "Bishop-white",
