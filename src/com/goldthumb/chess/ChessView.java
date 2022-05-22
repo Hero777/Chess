@@ -9,16 +9,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ChessView extends JPanel {
+
+    ChessDelegate chessDelegate;
+
     int originX = 50;
     int originY = 45;
     int cellSide = 60;
 
-    Map<String, Image> keyNameValueImage = new HashMap<String, Image>();
+    Map<String, Image> keyNameValueImage = new HashMap<>();
 
     public ChessView() {
         String[] imageNames = {
                 "Bishop-black",
                 "Bishop-white",
+                "Knight-black",
+                "Knight-white",
                 "King-black",
                 "King-white",
                 "Pawn-black",
@@ -45,10 +50,21 @@ public class ChessView extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
 
         drawBoard(g2);
+        drawPieces(g2);
 
-        drawImage(g2, 0, 0, "Rook-black");
-        drawImage(g2, 0, 1, "Pawn-black");
+    }
 
+    private void drawPieces(Graphics2D g2) {
+        for (int col = 7; col >= 0; col--) {
+            for (int row = 0; row < 8; row++) {
+                ChessPiece p = chessDelegate.pieceAt(col, row);
+                if (p != null) {
+                    drawImage(g2, col, row, p.imgName);
+                }
+            }
+        }
+//        drawImage(g2, 3, 3, "Bishop-black");
+//        drawImage(g2, 4, 4, "Bishop-white");
     }
 
     private void drawImage(Graphics2D g2, int col, int row, String imgName) {

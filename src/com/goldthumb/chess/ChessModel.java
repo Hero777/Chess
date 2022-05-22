@@ -28,10 +28,11 @@ public class ChessModel {
         piecesBox.add(new ChessPiece(4, 0, Player.WHITE, Rank.KING, "King-white"));
     }
 
-    ChessPiece pieceAt(int col, int row) {
-        for (ChessPiece cheesPiece : piecesBox) {
-            if (cheesPiece.col == col && cheesPiece.row == row) {
-                return cheesPiece;
+
+    public ChessPiece pieceAt(int col, int row) {
+        for (ChessPiece chessPiece : piecesBox) {
+            if (chessPiece.col == col && chessPiece.row == row) {
+                return chessPiece;
             }
         }
         return null;

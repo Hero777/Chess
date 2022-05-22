@@ -1,24 +1,10 @@
 package com.goldthumb.chess;
 
-enum Player {
-    WHITE,
-    BLACK,
-}
-
-enum Rank {
-    KING,
-    QUEEN,
-    BISHOP,
-    ROOK,
-    KNIGHT,
-    PAWN,
-}
-
 public class ChessPiece {
     int col;
     int row;
-    Player player;
-    Rank rank;
+    public Player player;
+    public Rank rank;
     String imgName;
 
     public ChessPiece(int col, int row, Player player, Rank rank, String imgName) {
