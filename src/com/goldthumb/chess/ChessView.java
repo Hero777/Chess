@@ -12,9 +12,11 @@ public class ChessView extends JPanel {
 
     ChessDelegate chessDelegate;
 
-    int originX = 50;
-    int originY = 45;
-    int cellSide = 60;
+    double scaleFactor = 0.9;
+
+    int originX = -1;
+    int originY = -1;
+    int cellSide = -1;
 
     Map<String, Image> keyNameValueImage = new HashMap<>();
 
@@ -22,10 +24,10 @@ public class ChessView extends JPanel {
         String[] imageNames = {
                 "Bishop-black",
                 "Bishop-white",
-                "Knight-black",
-                "Knight-white",
                 "King-black",
                 "King-white",
+                "Knight-black",
+                "Knight-white",
                 "Pawn-black",
                 "Pawn-white",
                 "Queen-black",
@@ -46,6 +48,11 @@ public class ChessView extends JPanel {
 
     protected void paintChildren(Graphics g) {
         super.paintChildren(g);
+
+        int smaller = Math.min(getSize().width, getSize().height);
+        cellSide = (int) (((double) smaller) * scaleFactor / 8);
+        originX = (getSize().width - 8 * cellSide) / 2;
+        originY = (getSize().height - 8 * cellSide) / 2;
 
         Graphics2D g2 = (Graphics2D) g;
 
@@ -69,17 +76,17 @@ public class ChessView extends JPanel {
 
     private void drawImage(Graphics2D g2, int col, int row, String imgName) {
         Image img = keyNameValueImage.get(imgName);
-        g2.drawImage(img, originX + col * cellSide, originY + row * cellSide, cellSide , cellSide , null);
+        g2.drawImage(img, originX + col * cellSide, originY + row * cellSide, cellSide, cellSide, null);
     }
 
     private Image loadImage(String imgFileName) throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
         URL resURL = classLoader.getResource("img/" + imgFileName);
         if (resURL == null) {
-            System.out.println("failed to load image");
+//            System.out.println("failed to load image");
             return null;
         } else {
-            System.out.println("yeah");
+//            System.out.println("yeah");
 
             File imgFile = new File(resURL.toURI());
             return ImageIO.read(imgFile);
