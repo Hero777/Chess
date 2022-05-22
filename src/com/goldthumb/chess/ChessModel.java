@@ -8,24 +8,24 @@ public class ChessModel {
 
     public void reset() {
         for (int i = 0; i < 2; i++) {
-            piecesBox.add(new ChessPiece(i * 7, 7, Player.BLACK, Rank.ROOK, "Rook-black"));
-            piecesBox.add(new ChessPiece(i * 7, 0, Player.WHITE, Rank.ROOK, "Rook-white"));
+            piecesBox.add(new ChessPiece(i * 7, 7, Player.BLACK, Rank.ROOK, ChessConstants.B_ROOK));
+            piecesBox.add(new ChessPiece(i * 7, 0, Player.WHITE, Rank.ROOK, ChessConstants.W_ROOK));
 
-            piecesBox.add(new ChessPiece(1 + i * 5, 7, Player.BLACK, Rank.KNIGHT, "Knight-black"));
-            piecesBox.add(new ChessPiece(1 + i * 5, 0, Player.WHITE, Rank.KNIGHT, "Knight-white"));
+            piecesBox.add(new ChessPiece(1 + i * 5, 7, Player.BLACK, Rank.KNIGHT, ChessConstants.B_KNIGHT));
+            piecesBox.add(new ChessPiece(1 + i * 5, 0, Player.WHITE, Rank.KNIGHT, ChessConstants.W_KNIGHT));
 
-            piecesBox.add(new ChessPiece(2 + i * 3, 7, Player.BLACK, Rank.BISHOP, "Bishop-black"));
-            piecesBox.add(new ChessPiece(2 + i * 3, 0, Player.WHITE, Rank.BISHOP, "Bishop-white"));
+            piecesBox.add(new ChessPiece(2 + i * 3, 7, Player.BLACK, Rank.BISHOP, ChessConstants.B_BISHOP));
+            piecesBox.add(new ChessPiece(2 + i * 3, 0, Player.WHITE, Rank.BISHOP, ChessConstants.W_BISHOP));
         }
         for (int i = 0; i < 8; i++) {
-            piecesBox.add(new ChessPiece(i, 6, Player.BLACK, Rank.PAWN, "Pawn-black"));
-            piecesBox.add(new ChessPiece(i, 1, Player.WHITE, Rank.PAWN, "Pawn-white"));
+            piecesBox.add(new ChessPiece(i, 6, Player.BLACK, Rank.PAWN, ChessConstants.B_PAWN));
+            piecesBox.add(new ChessPiece(i, 1, Player.WHITE, Rank.PAWN, ChessConstants.W_PAWN));
 
         }
-        piecesBox.add(new ChessPiece(3, 7, Player.BLACK, Rank.QUEEN, "Queen-black"));
-        piecesBox.add(new ChessPiece(3, 0, Player.WHITE, Rank.QUEEN, "Queen-white"));
-        piecesBox.add(new ChessPiece(4, 7, Player.BLACK, Rank.KING, "King-black"));
-        piecesBox.add(new ChessPiece(4, 0, Player.WHITE, Rank.KING, "King-white"));
+        piecesBox.add(new ChessPiece(3, 7, Player.BLACK, Rank.QUEEN, ChessConstants.B_QUEEN));
+        piecesBox.add(new ChessPiece(3, 0, Player.WHITE, Rank.QUEEN, ChessConstants.W_QUEEN));
+        piecesBox.add(new ChessPiece(4, 7, Player.BLACK, Rank.KING, ChessConstants.B_KING));
+        piecesBox.add(new ChessPiece(4, 0, Player.WHITE, Rank.KING, ChessConstants.W_KING));
     }
 
 

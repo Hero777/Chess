@@ -10,30 +10,31 @@ import java.util.Map;
 
 public class ChessView extends JPanel {
 
-    ChessDelegate chessDelegate;
+    private ChessDelegate chessDelegate;
 
-    double scaleFactor = 0.9;
+    private double scaleFactor = 0.9;
+    private int originX = -1;
+    private int originY = -1;
+    private int cellSide = -1;
 
-    int originX = -1;
-    int originY = -1;
-    int cellSide = -1;
+    private Map<String, Image> keyNameValueImage = new HashMap<>();
 
-    Map<String, Image> keyNameValueImage = new HashMap<>();
+    ChessView(ChessDelegate chessDelegate) {
+        this.chessDelegate = chessDelegate;
 
-    public ChessView() {
         String[] imageNames = {
-                "Bishop-black",
-                "Bishop-white",
-                "King-black",
-                "King-white",
-                "Knight-black",
-                "Knight-white",
-                "Pawn-black",
-                "Pawn-white",
-                "Queen-black",
-                "Queen-white",
-                "Rook-black",
-                "Rook-white"
+                ChessConstants.B_BISHOP,
+                ChessConstants.W_BISHOP,
+                ChessConstants.B_KING,
+                ChessConstants.W_KING,
+                ChessConstants.B_KNIGHT,
+                ChessConstants.W_KNIGHT,
+                ChessConstants.B_PAWN,
+                ChessConstants.W_PAWN,
+                ChessConstants.B_QUEEN,
+                ChessConstants.W_QUEEN,
+                ChessConstants.B_ROOK,
+                ChessConstants.W_ROOK
         };
         for (String imgNm : imageNames) {
             try {
