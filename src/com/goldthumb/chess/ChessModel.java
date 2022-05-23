@@ -38,8 +38,20 @@ public class ChessModel extends JPanel implements MouseListener {
         if (candidate == null) {
             return;
         }
+
+        ChessPiece target = pieceAt(toCol, toRow);
+        if (target != null) {
+            if (target.player == candidate.player) {
+                return;
+            } else {
+                piecesBox.remove(target);
+            }
+        }
+
         candidate.col = toCol;
         candidate.row = toRow;
+
+        System.out.println(piecesBox.size());
     }
 
     public ChessPiece pieceAt(int col, int row) {

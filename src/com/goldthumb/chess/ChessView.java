@@ -76,7 +76,7 @@ public class ChessView extends JPanel implements MouseListener, MouseMotionListe
         for (int col = 7; col >= 0; col--) {
             for (int row = 0; row < 8; row++) {
                 ChessPiece p = chessDelegate.pieceAt(col, row);
-                if (p != null) {
+                if (p != null && p != movingPiece) {
                     drawImage(g2, col, row, p.imgName);
                 }
             }
