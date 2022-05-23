@@ -3,12 +3,14 @@ package com.goldthumb.chess;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ChessView extends JPanel {
+public class ChessView extends JPanel implements MouseListener {
 
     private ChessDelegate chessDelegate;
 
@@ -36,16 +38,18 @@ public class ChessView extends JPanel {
                 ChessConstants.B_ROOK,
                 ChessConstants.W_ROOK
         };
-        for (String imgNm : imageNames) {
-            try {
+        try {
+            for (String imgNm : imageNames) {
                 Image img = loadImage(imgNm + ".png");
                 keyNameValueImage.put(imgNm, img);
-            } catch (Exception e) {
-                e.printStackTrace();
             }
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+        addMouseListener(this);
     }
+
 
     protected void paintChildren(Graphics g) {
         super.paintChildren(g);
@@ -113,4 +117,32 @@ public class ChessView extends JPanel {
         g2.fillRect(originX + col * cellSide, originY + row * cellSide, cellSide, cellSide);
     }
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        int x = e.getPoint().x;
+        int col = (x - originX) / cellSide;
+        System.out.println("from " + col);
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        int x = e.getPoint().x;
+        int col = (x - originX) / cellSide;
+        System.out.println("from " + col);
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
 }

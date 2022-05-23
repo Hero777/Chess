@@ -1,9 +1,12 @@
 package com.goldthumb.chess;
 
+import javax.swing.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ChessModel {
+public class ChessModel extends JPanel implements MouseListener {
     private Set<ChessPiece> piecesBox = new HashSet<>();
 
     public void reset() {
@@ -87,5 +90,30 @@ public class ChessModel {
         desc += "  0 1 2 3 4 5 6 7";
 
         return desc;
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent mouseEvent) {
+        System.out.println("from "+ mouseEvent.getLocationOnScreen());
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent mouseEvent) {
+        System.out.println("to "+ mouseEvent.getLocationOnScreen());
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent mouseEvent) {
+
     }
 }
