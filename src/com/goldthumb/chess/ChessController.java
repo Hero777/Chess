@@ -1,10 +1,11 @@
 package com.goldthumb.chess;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class ChessController implements ChessDelegate {
     private ChessModel chessModel = new ChessModel();
-    private ChessView panel;
+    private ChessView centerPanel;
 
     public ChessController() {
         chessModel.reset();
@@ -12,10 +13,18 @@ public class ChessController implements ChessDelegate {
         JFrame frame = new JFrame("Chess");
         frame.setSize(600, 600);
 //        frame.setLocation(0,300);
+        frame.setLayout(new BorderLayout());
 
-        panel = new ChessView(this);
+        centerPanel = new ChessView(this);
 
-        frame.add(panel);
+        frame.add(centerPanel, BorderLayout.CENTER);
+
+        JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton resetBtn = new JButton("Reset");
+        southPanel.add(resetBtn);
+        southPanel.add(new JButton("Delete Me"));
+        frame.add(southPanel, BorderLayout.PAGE_END);
+
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -34,6 +43,6 @@ public class ChessController implements ChessDelegate {
     @Override
     public void movePiece(int fromCol, int fromRow, int toCol, int toRow) {
         chessModel.movePiece(fromCol, fromRow, toCol, toRow);
-        panel.repaint();
+        centerPanel.repaint();
     }
 }
