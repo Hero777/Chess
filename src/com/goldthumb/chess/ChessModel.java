@@ -8,6 +8,7 @@ import java.util.Set;
 
 public class ChessModel extends JPanel implements MouseListener {
     private Set<ChessPiece> piecesBox = new HashSet<>();
+    private Player playerInTurn = Player.WHITE;
 
     public void reset() {
         piecesBox.removeAll(piecesBox);
@@ -31,11 +32,13 @@ public class ChessModel extends JPanel implements MouseListener {
         piecesBox.add(new ChessPiece(3, 0, Player.WHITE, Rank.QUEEN, ChessConstants.W_QUEEN));
         piecesBox.add(new ChessPiece(4, 7, Player.BLACK, Rank.KING, ChessConstants.B_KING));
         piecesBox.add(new ChessPiece(4, 0, Player.WHITE, Rank.KING, ChessConstants.W_KING));
+
+        playerInTurn = Player.WHITE;
     }
 
     public void movePiece(int fromCol, int fromRow, int toCol, int toRow) {
         ChessPiece candidate = pieceAt(fromCol, fromRow);
-        if (candidate == null) {
+        if (candidate == null || candidate.player != playerInTurn) {
             return;
         }
 
@@ -50,6 +53,7 @@ public class ChessModel extends JPanel implements MouseListener {
 
         candidate.col = toCol;
         candidate.row = toRow;
+        playerInTurn = playerInTurn == Player.WHITE ? Player.BLACK : Player.WHITE;
 
         System.out.println(piecesBox.size());
     }
@@ -111,12 +115,12 @@ public class ChessModel extends JPanel implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
-        System.out.println("from "+ mouseEvent.getLocationOnScreen());
+        System.out.println("from " + mouseEvent.getLocationOnScreen());
     }
 
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
-        System.out.println("to "+ mouseEvent.getLocationOnScreen());
+        System.out.println("to " + mouseEvent.getLocationOnScreen());
     }
 
     @Override

@@ -2,10 +2,12 @@ package com.goldthumb.chess;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ChessController implements ChessDelegate {
     private ChessModel chessModel = new ChessModel();
-    private ChessView centerPanel;
+    private ChessView chessBoardPanel;
 
     public ChessController() {
         chessModel.reset();
@@ -15,15 +17,23 @@ public class ChessController implements ChessDelegate {
 //        frame.setLocation(0,300);
         frame.setLayout(new BorderLayout());
 
-        centerPanel = new ChessView(this);
+        chessBoardPanel = new ChessView(this);
 
-        frame.add(centerPanel, BorderLayout.CENTER);
+        frame.add(chessBoardPanel, BorderLayout.CENTER);
 
-        JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton resetBtn = new JButton("Reset");
-        southPanel.add(resetBtn);
-        southPanel.add(new JButton("Delete Me"));
-        frame.add(southPanel, BorderLayout.PAGE_END);
+        resetBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                chessModel.reset();
+                chessBoardPanel.repaint();
+            }
+        });
+
+        buttonsPanel.add(resetBtn);
+        buttonsPanel.add(new JButton("Delete Me"));
+        frame.add(buttonsPanel, BorderLayout.PAGE_END);
 
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,6 +53,6 @@ public class ChessController implements ChessDelegate {
     @Override
     public void movePiece(int fromCol, int fromRow, int toCol, int toRow) {
         chessModel.movePiece(fromCol, fromRow, toCol, toRow);
-        centerPanel.repaint();
+        chessBoardPanel.repaint();
     }
 }
