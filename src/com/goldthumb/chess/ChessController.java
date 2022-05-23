@@ -5,9 +5,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ChessController implements ChessDelegate {
+public class ChessController implements ChessDelegate, ActionListener {
     private ChessModel chessModel = new ChessModel();
     private ChessView chessBoardPanel;
+    private JButton resetBtn;
+    private JButton serverBtn;
+    private JButton clientBtn;
+
 
     public ChessController() {
         chessModel.reset();
@@ -22,17 +26,18 @@ public class ChessController implements ChessDelegate {
         frame.add(chessBoardPanel, BorderLayout.CENTER);
 
         JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JButton resetBtn = new JButton("Reset");
-        resetBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                chessModel.reset();
-                chessBoardPanel.repaint();
-            }
-        });
-
+        resetBtn = new JButton("Reset");
+        resetBtn.addActionListener(this);
         buttonsPanel.add(resetBtn);
-        buttonsPanel.add(new JButton("Delete Me"));
+
+        serverBtn = new JButton("Listen");
+        buttonsPanel.add(serverBtn);
+        serverBtn.addActionListener(this);
+
+        clientBtn = new JButton("Connect");
+        buttonsPanel.add(clientBtn);
+        clientBtn.addActionListener(this);
+
         frame.add(buttonsPanel, BorderLayout.PAGE_END);
 
         frame.setVisible(true);
@@ -54,5 +59,20 @@ public class ChessController implements ChessDelegate {
     public void movePiece(int fromCol, int fromRow, int toCol, int toRow) {
         chessModel.movePiece(fromCol, fromRow, toCol, toRow);
         chessBoardPanel.repaint();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        System.out.println(e.getSource());
+        if (e.getSource() == resetBtn) {
+            chessModel.reset();
+            chessBoardPanel.repaint();
+            System.out.println("reset clicked.");
+        } else if (e.getSource() == serverBtn) {
+            System.out.println("Listen (for socket server) clicked.");
+        } else if (e.getSource() == clientBtn) {
+            System.out.println("Connect (for socket client) clicked.");
+        }
+
     }
 }
