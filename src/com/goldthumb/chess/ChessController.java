@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
 
 public class ChessController implements ChessDelegate, ActionListener {
     private ChessModel chessModel = new ChessModel();
@@ -69,6 +72,19 @@ public class ChessController implements ChessDelegate, ActionListener {
             chessBoardPanel.repaint();
             System.out.println("reset clicked.");
         } else if (e.getSource() == serverBtn) {
+
+            try (var listener = new ServerSocket(50000)) {
+                System.out.println("server is listening to port 50000");
+                while (true) {
+                    try (var socket = listener.accept()) {
+                        var out = new PrintWriter(socket.getOutputStream(), true);
+                        out.println("from (0,1) to (0,2)");
+                    }
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+
             System.out.println("Listen (for socket server) clicked.");
         } else if (e.getSource() == clientBtn) {
             System.out.println("Connect (for socket client) clicked.");
